@@ -1,0 +1,241 @@
+<html>
+  <body>
+    <section class="h-50 gradient-form">
+      <div class="container py-2 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-xl-5">
+            <div
+              class="card mb-3 rounded-3 text-black"
+              style="background-color: #e9e9e9; margin-top: -20%"
+            >
+              <div class="row g-0">
+                <div class="card-body p-md-5 mx-md-4">
+                  <h1 class="text-center">Upload Excel File</h1>
+
+                  <br />
+
+                  <!-- <div class="text-center">
+                    <div class="form-group"> -->
+                      <div class="row mb-3">
+            
+                        <div class="col">
+                         
+                      <mat-label>Database &nbsp;&nbsp;&nbsp;:</mat-label>&emsp;&nbsp;&nbsp;&emsp;&emsp;
+                          <mat-radio-group
+                            aria-label="Select an option"
+                            (change)="onChange($event)"
+                          >
+                          
+                            <mat-radio-button
+                              id="MongoDb"
+                              type="radio"
+                              value="mongoDb"
+                              name="mongoDb"
+                              checked
+                              >mongoDb</mat-radio-button
+                            >
+
+                            <mat-radio-button
+                              id="MySql"
+                              type="radio"
+                              value="MySql"
+                              name="mongoDb"
+                              >MySql</mat-radio-button
+                            >
+                          </mat-radio-group>
+                        </div>
+                      </div>
+                    <!-- </div>
+                  </div> -->
+
+                  <!-- <div class="form-group text-center">
+              <label><b>Database<strong style="color: red;">*</strong>  &nbsp;</b></label>
+              <br>
+              <div class="row mb-4">
+                <div class="col">
+                <input id="MongoDb" 
+                          type="radio" 
+                          value="mongoDb" 
+                          name="mongoDb"
+                          
+                          (change)="changeOption($event)"
+                          checked
+                          
+                          >
+                <label for="mongoDb">mongoDb</label>
+    
+            </div>
+            <div class="col">
+                <input id="MySql" 
+                          type="radio" 
+                          value="MySql" 
+                          name="mongoDb" 
+                          (change)="changeOption($event)">
+                <label for="MySql">MySql</label>    
+             </div>
+             </div>           
+      </div> -->
+      <div class="row mb-3">
+
+        <div class="col-6">
+          
+          <label>Select Collection/Table :</label>
+
+        </div>
+          <div class="col-6">
+
+          
+                  <div class="text-center">
+                    <mat-form-field>
+                      <mat-label>Select Collection/Table</mat-label>
+                      
+                      <mat-select
+                        [(value)]="selectedOption"
+                        id="selectedOption"
+                        name="selectedOption"
+                      >
+                        <mat-option
+                          *ngFor="let option of db"
+                          [value]="option"
+                          >{{ option }}</mat-option
+                        >
+                        <mat-option value="other">Other</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  
+          </div>
+          </div>
+
+          <div class="row mb-3" *ngIf="selectedOption === 'other'">
+            <div class="col-6">
+              <label>Enter collection/Table : </label>
+    
+              </div>
+              <div class="col-6">
+                  <div
+                    class="form-group text-center"
+                    *ngIf="selectedOption === 'other'"
+                  >
+                    <mat-form-field>
+                      <input
+                        matInput
+                        placeholder="Enter Collection/Table"
+                        [(ngModel)]="customValue"
+                        (change)="onDropdownchange($event)"
+                      />
+                    </mat-form-field>
+                  </div>
+                  </div></div>
+
+                  <!-- 
+            <div class="form-group text-center">
+
+              <label><b>Select Table/Collection<strong style="color: red;">*</strong>  &nbsp;</b></label>
+
+            <select [(ngModel)]="selectedOption" id="selectedOption" required name="selectedOption" >
+
+              <option value="">Select an option</option>
+
+              <option *ngFor="let option of db">{{option}}</option>
+
+              <option value="other">Other</option>
+
+            </select>
+
+          </div> -->
+
+                  <form (ngSubmit)="upload(form)" #form="ngForm">
+                    <div class="form-group text-center">
+                      <input #fileUpload
+                        (change)="this.onFilechange($event)"
+                        class="form-control"
+                        type="file"
+                        id="formFile"
+                        name="file"
+                        required
+                      />
+                    </div>
+                    <div class="text-center">
+                      <button
+                        [disabled]="!form.valid"
+                        type="submit"
+                        class="btn btn-primary mt-3"
+                      >
+                        Upload
+                      </button>
+                    </div>
+                  </form>
+
+                  <!-- (click)="this.upload()" -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+<section class="h-100 gradient-form" >
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-5">
+          <div class="card rounded-3 text-black" style="background-color: #e9e9e9; margin-top: -20%;">
+            <div class="row g-0">
+                
+            <div class="card-body p-md-5 mx-md-4">
+              
+           <h3 class="text-center">  Upload file</h3>
+            <br>
+            <form (ngSubmit)="upload(form)" #form="ngForm">
+              <div class="form-group text-center">
+              <label><b>Select Table<strong style="color: red;">*</strong> : &nbsp;</b></label>
+              <select [(ngModel)]="selectedOption" id="selectedOption" required name="selectedOption" >
+                <option value="">Select an option</option>
+                <option *ngFor="let option of db">{{option}}</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <br>
+            <div class="form-group text-center "  *ngIf="selectedOption==='other'">
+              <input type="text"  required [(ngModel)]="customValue" name="customValue" (change)="onDropdownchange($event)" >
+            </div>
+            <br>
+            <div class="form-group text-center">
+              <input (change)="this.onFilechange($event)" class="form-control" type="file" id="formFile" name="file" required>
+              </div>
+              <div class="text-center">
+              <button   [disabled]="!form.valid" type="submit" class="btn btn-primary mt-3">Upload</button> 
+            </div>   
+             </form>
+         (click)="this.upload()"
+            </div>
+            </div>
+            </div>
+        </div>
+        </div>
+</div>
+</section>
+ -->
